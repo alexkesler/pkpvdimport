@@ -24,11 +24,9 @@ public class Cause {
     }
 
     public String getId() { return id; }
-
     public void setId(String id) { this.id = id; }
 
     public Package getPackage() { return pack; }
-
     public void setPackage(Package aPackage) { this.pack = aPackage; }
 
     public String getRegnum() { return pack ==null?null: pack.getRegnum(); }
@@ -37,8 +35,7 @@ public class Cause {
 
     public String getType() { return pack.getType(); }
 
-     public String getProcId() { return procId; }
-
+    public String getProcId() { return procId; }
     public void setProcId(String procId) { this.procId = procId; }
 
     public List<Applicant> getApplicants() {return applicants;}
@@ -48,28 +45,19 @@ public class Cause {
     public List<Pay> getPays() {return pays;}
 
     public Date getStartDate() { return startDate; }
-
     public void setStartDate(Date startDate) { this.startDate = startDate; }
 
     public Date getEstimateDate() { return estimateDate; }
-
     public void setEstimateDate(Date estimateDate) { this.estimateDate = estimateDate; }
 
     public Integer getState() { return state; }
-
     public void setState(Integer state) { this.state = state; }
 
     public String getStatusMD() {  return statusMD; }
-
     public void setStatusMD(String statusMD) { this.statusMD = statusMD; }
 
-    public Integer getPurpose() {
-        return purpose;
-    }
-
-    public void setPurpose(Integer purpose) {
-        this.purpose = purpose;
-    }
+    public Integer getPurpose() { return purpose; }
+    public void setPurpose(Integer purpose) { this.purpose = purpose; }
 
     public Date getBeginDate() { return pack.getBeginDate(); }
 
