@@ -30,7 +30,9 @@ public class ArchiveXLSXExporter extends XLSXExporter {
         sh.setColumnWidth(0, 256*5);
         sh.setColumnWidth(1, 256*30);
         sh.setColumnWidth(2, 256*15);
-        sh.setColumnWidth(3, 256*10);
+        sh.setColumnWidth(3, 256*50);
+        sh.setColumnWidth(4, 256*50);
+        sh.setColumnWidth(5, 256*10);
 
         // Создаем заголовок
         Row titleRow = sh.createRow(0);
@@ -67,10 +69,14 @@ public class ArchiveXLSXExporter extends XLSXExporter {
         cell.setCellStyle(cellStyle);
 
         cell = titleRow.createCell(3);
-        cell.setCellValue("Рег действие");
+        cell.setCellValue("Групповой тип");
         cell.setCellStyle(cellStyle);
 
         cell = titleRow.createCell(4);
+        cell.setCellValue("Тип");
+        cell.setCellStyle(cellStyle);
+
+        cell = titleRow.createCell(5);
         cell.setCellValue("Пошлина");
         cell.setCellStyle(cellStyle);
 
@@ -86,7 +92,7 @@ public class ArchiveXLSXExporter extends XLSXExporter {
         for (int rownum = 0; rownum < causes.size(); rownum++) {
             Cause cause = causes.get(rownum);
             Row row = sh.createRow(rownum+1);
-            for (int colnum = 0; colnum < 5; colnum++) {
+            for (int colnum = 0; colnum < 6; colnum++) {
                 cell = row.createCell(colnum);
 
                 switch (colnum) {
@@ -101,9 +107,12 @@ public class ArchiveXLSXExporter extends XLSXExporter {
                         cell.setCellStyle(dateCellStyle);
                         break;
                     case 3:
-                        cell.setCellValue(cause.getProcId());
+                        cell.setCellValue(cause.getGroupType());
                         break;
                     case 4:
+                        cell.setCellValue(cause.getType());
+                        break;
+                    case 5:
                         cell.setCellValue(cause.getTotalCharge());
                         break;
                     default:

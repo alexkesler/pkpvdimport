@@ -93,6 +93,14 @@ public class MainView extends JFrame {
             }
         });
 
+        JButton recieveForPaysButton = new JButton("Получить для платежей");
+        recieveForPaysButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.readCausesForPays();
+            }
+        });
+
         JButton exportButton = new JButton("Выгрузить список пошлин");
         exportButton.addActionListener(new ActionListener() {
             @Override
@@ -103,6 +111,7 @@ public class MainView extends JFrame {
 
         buttonPanel.add(okButton);
         buttonPanel.add(recieveButton);
+        buttonPanel.add(recieveForPaysButton);
         buttonPanel.add(exportButton);
 
         mainPanel.add(dataPanel, BorderLayout.CENTER);
