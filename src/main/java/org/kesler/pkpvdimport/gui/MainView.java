@@ -50,6 +50,29 @@ public class MainView extends JFrame {
         filterPanel.add(new JLabel("До"));
         filterPanel.add(toDateField);
 
+        JPanel receivePanel = new JPanel();
+        receivePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Загрузить"));
+
+        JButton receiveButton = new JButton("Получить");
+        receiveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.readCauses();
+            }
+        });
+
+        JButton receiveForPaysButton = new JButton("Получить для платежей");
+        receiveForPaysButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.readCausesForPays();
+            }
+        });
+
+        receivePanel.add(receiveButton);
+        receivePanel.add(receiveForPaysButton);
+
+
         causeTableModel = new CauseTableModel();
         JTable causeTable = new JTable(causeTableModel);
         causeTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -70,10 +93,26 @@ public class MainView extends JFrame {
         causePanel.add(new JLabel("Заявители"));
         causePanel.add(applicantsListScrollPane, "grow, pushx");
 
+        // Панель отчетов
+        JPanel exportPanel = new JPanel();
+        exportPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Отчеты"));
+
+        JButton exportPaysButton = new JButton("Выгрузить список пошлин");
+        exportPaysButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.exportPays();
+            }
+        });
+
+
+        exportPanel.add(exportPaysButton);
 
         dataPanel.add(filterPanel);
+        dataPanel.add(receivePanel);
         dataPanel.add(causeTableScrollPane);
         dataPanel.add(causePanel);
+        dataPanel.add(exportPanel);
 
         JPanel buttonPanel = new JPanel();
 
@@ -81,38 +120,13 @@ public class MainView extends JFrame {
         okButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
+                System.exit(0);
             }
         });
 
-        JButton recieveButton = new JButton("Получить");
-        recieveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.readCauses();
-            }
-        });
 
-        JButton recieveForPaysButton = new JButton("Получить для платежей");
-        recieveForPaysButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.readCausesForPays();
-            }
-        });
-
-        JButton exportButton = new JButton("Выгрузить список пошлин");
-        exportButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.exportPays();
-            }
-        });
 
         buttonPanel.add(okButton);
-        buttonPanel.add(recieveButton);
-        buttonPanel.add(recieveForPaysButton);
-        buttonPanel.add(exportButton);
 
         mainPanel.add(dataPanel, BorderLayout.CENTER);
         mainPanel.add(buttonPanel,BorderLayout.SOUTH);
