@@ -8,6 +8,7 @@ public class Cause {
     private String id;
     private Package pack;
     private String regnum;
+    private RecBook recBook;
     private String procId;
     private List<Applicant> applicants;
     private List<Obj> objects;
@@ -32,6 +33,9 @@ public class Cause {
 
     public String getRegnum() { return regnum; }
     public void setRegnum(String regnum) { this.regnum = regnum; }
+
+    public RecBook getRecBook() { return recBook; }
+    public void setRecBook(RecBook recBook) { this.recBook = recBook; }
 
     public String getGroupType() { return pack.getGroupType(); }
 
