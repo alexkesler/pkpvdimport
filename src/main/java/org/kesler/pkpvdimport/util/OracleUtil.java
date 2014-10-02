@@ -9,26 +9,25 @@ import java.util.Properties;
 
 public class OracleUtil {
     private static Connection connection;
+    private static String serverIp = "10.10.0.124";
+
     public static synchronized Connection getConnection() {
         if (connection == null) createConnection();
         return connection;
     }
 
-    public static synchronized void closeConnection() {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        connection = null;
+    public static void setServerIp(String s) {
+        serverIp = s;
     }
+
+    public static String getServerIp() {return serverIp;}
 
     private static void createConnection() {
         Properties prop = new Properties();
         prop.setProperty("user", "admin");
         prop.setProperty("password", "admin");
 
-        String url = "jdbc:oracle:thin:@10.10.0.124:1521:xe";
+        String url = "jdbc:oracle:thin:@" + serverIp + ":1521:xe";
 
         Locale prevLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
@@ -49,6 +48,15 @@ public class OracleUtil {
 
         Locale.setDefault(prevLocale);
 
+    }
+
+    public static synchronized void closeConnection() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        connection = null;
     }
 
 }

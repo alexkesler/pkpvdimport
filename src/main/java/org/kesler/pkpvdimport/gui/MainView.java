@@ -4,6 +4,7 @@ import com.alee.extended.date.WebDateField;
 import net.miginfocom.swing.MigLayout;
 import org.kesler.pkpvdimport.domain.Applicant;
 import org.kesler.pkpvdimport.domain.Cause;
+import org.kesler.pkpvdimport.util.OracleUtil;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -42,9 +43,14 @@ public class MainView extends JFrame {
 
         // Панель фильтра
         JPanel filterPanel = new JPanel(new MigLayout());
+        serverTextField = new JTextField(15);
+        serverTextField.setText(OracleUtil.getServerIp());
+
         fromDateField = new WebDateField(new Date());
         toDateField = new WebDateField(new Date());
 
+        filterPanel.add(new JLabel("Сервер:"));
+        filterPanel.add(serverTextField, "wrap");
         filterPanel.add(new JLabel("От"));
         filterPanel.add(fromDateField, "wrap");
         filterPanel.add(new JLabel("До"));
@@ -111,6 +117,8 @@ public class MainView extends JFrame {
         setContentPane(mainPanel);
         pack();
     }
+
+    public String getServerIp() {return serverTextField.getText();}
 
     public Date getFromDate() {
         return fromDateField.getDate();

@@ -5,6 +5,7 @@ import org.kesler.pkpvdimport.export.XLSXExportEnum;
 import org.kesler.pkpvdimport.export.XLSXExporterFactory;
 import org.kesler.pkpvdimport.pvdimport.ReaderListener;
 import org.kesler.pkpvdimport.pvdimport.support.PackagesReader;
+import org.kesler.pkpvdimport.util.OracleUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +30,13 @@ public class MainViewController implements ReaderListener{
     List<Cause> getCauses() {return causes;}
 
     void readCauses() {
+        OracleUtil.setServerIp(mainView.getServerIp());
         packagesReader = new PackagesReader(this, mainView.getFromDate(), mainView.getToDate());
         packagesReader.readFullInSeparateThread();
     }
 
     void readCausesForPays() {
+        OracleUtil.setServerIp(mainView.getServerIp());
         packagesReader = new PackagesReader(this, mainView.getFromDate(), mainView.getToDate());
         packagesReader.readChargeInSeparateThread();
     }
